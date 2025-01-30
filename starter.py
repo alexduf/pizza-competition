@@ -64,20 +64,30 @@ def get_score(tours_string: str):
 
     return total_distance, True, "✅ Solution valide."
 
+def plot_solution(tours_string: str):
+    import matplotlib.pyplot as plt
+    import numpy as np
 
+    tours = [list(map(int, tour.split())) for tour in tours_string.strip().split("\n")]
+    clients = load_clients("dataset.csv")
 
+    for tour in tours:
+        x = [depot[0]] + [clients[client_id - 1]["position"][0] for client_id in tour] + [depot[0]]
+        y = [depot[1]] + [clients[client_id - 1]["position"][1] for client_id in tour] + [depot[1]]
+        plt.plot(x, y, marker="o")
 
-if __name__ == "__main__":
-    import datetime
-    clients = load_clients("dataset.csv") # les clients sont sockés dans une liste de dict, avec pour clé "id", "position", "pizzas"
-    tours = solve_v1(clients)
+    plt.scatter([client["position"][0] for client in clients], [client["position"][1] for client in clients], color="red")
+    plt.scatter(depot[0], depot[1], color="green")
+    plt.gca().set_aspect("equal")
+    plt.show()
+
+def evaluate_solver(
+        solver: lambda x: str,
+        clients: list[dict[str, any]],
+        draw: bool = False
+) -> tuple[int, bool, str]:
+    tours = solver(clients)
     score, valid, message = get_score(tours)
-    print(message)
-
-    tours = solve_v2(clients)
-    score, valid, message = get_score(tours)
-    print(message)
-    
     if valid:
         print(f"Score : {score}")
 
@@ -87,3 +97,12 @@ if __name__ == "__main__":
         with open(f'solutions/{file_name}.txt', 'w') as f:
             f.write(tours)
         print('Solution sauvegardée')
+        if draw:
+            plot_solution(tours)
+    return tours
+
+if __name__ == "__main__":
+    import datetime
+    clients = load_clients("dataset.csv") # les clients sont sockés dans une liste de dict, avec pour clé "id", "position", "pizzas"
+    evaluate_solver(solve_v1, clients, draw=False)
+    evaluate_solver(solve_v2, clients, draw=True)
