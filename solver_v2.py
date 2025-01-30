@@ -1,5 +1,4 @@
-def distance(a: tuple[int, int], b: tuple[int, int]) -> int:
-    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+from evaluator import manhattan_distance
 
 
 def nearest_neighbour(
@@ -11,7 +10,7 @@ def nearest_neighbour(
     for client in clients:
         if (client["pizzas"] <= available_space and
                 (nearest is None or
-                 distance(position, client["position"]) < distance(position, nearest["position"]))
+                 manhattan_distance(position, client["position"]) < manhattan_distance(position, nearest["position"]))
         ):
             nearest = client
     return nearest

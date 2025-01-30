@@ -1,5 +1,6 @@
-def distance(a: tuple[int, int], b: tuple[int, int]) -> int:
-    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+
+from evaluator import manhattan_distance
 
 
 def nearest_neighbour(
@@ -11,7 +12,7 @@ def nearest_neighbour(
     for client in clients:
         if (client["pizzas"] <= available_space and
                 (nearest is None or
-                 distance(position, client["position"]) < distance(position, nearest["position"]))
+                 manhattan_distance(position, client["position"]) < manhattan_distance(position, nearest["position"]))
         ):
             nearest = client
     return nearest
@@ -31,7 +32,7 @@ def solve_v3(clients: list[dict[str, any]]) -> str:
             current_tour = []
 
         neighbour = nearest_neighbour(current_position, clients, available_space)
-        if not neighbour or distance(current_position, neighbour["position"]) > distance((0, 0), neighbour["position"]):
+        if not neighbour or manhattan_distance(current_position, neighbour["position"]) > manhattan_distance((0, 0), neighbour["position"]):
             available_space = 10
             current_position = (0, 0)
             tours.append(current_tour)
