@@ -1,6 +1,7 @@
 # Données initiales
 from solver_v1 import solve_v1
 from solver_v2 import solve_v2
+from solver_v3 import solve_v3
 
 depot = (0, 0)  # Position du dépôt
 capacity = 10  # Capacité maximale du scooter
@@ -104,5 +105,6 @@ def evaluate_solver(
 if __name__ == "__main__":
     import datetime
     clients = load_clients("dataset.csv") # les clients sont sockés dans une liste de dict, avec pour clé "id", "position", "pizzas"
-    evaluate_solver(solve_v1, clients, draw=False)
-    evaluate_solver(solve_v2, clients, draw=True)
+    # evaluate_solver(solve_v1, clients, draw=False)
+    # evaluate_solver(solve_v2, clients, draw=False)
+    evaluate_solver(solve_v3, clients, draw=True)
