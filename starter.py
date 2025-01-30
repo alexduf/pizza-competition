@@ -1,5 +1,6 @@
 # Données initiales
 from solver_v1 import solve_v1
+from solver_v2 import solve_v2
 
 depot = (0, 0)  # Position du dépôt
 capacity = 10  # Capacité maximale du scooter
@@ -70,6 +71,10 @@ if __name__ == "__main__":
     import datetime
     clients = load_clients("dataset.csv") # les clients sont sockés dans une liste de dict, avec pour clé "id", "position", "pizzas"
     tours = solve_v1(clients)
+    score, valid, message = get_score(tours)
+    print(message)
+
+    tours = solve_v2(clients)
     score, valid, message = get_score(tours)
     print(message)
     
