@@ -93,7 +93,7 @@ def evaluate_solver(
         print(f"Score : {score}")
 
         date = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-        file_name = f'sol_{score}_{date}'
+        file_name = f'sol_{score}_{solver.__name__}_{date}'
 
         with open(f'solutions/{file_name}.txt', 'w') as f:
             f.write(tours)
