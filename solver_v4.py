@@ -45,7 +45,10 @@ def plan_tour(
         if available_space <= 0:
             return current_tour
 
-        neighbour = nearest_neighbour(current_position, clients, available_space)
+        if len(current_tour) == 0:
+            neighbour = farthest_neighbour(current_position, clients, available_space)
+        else:
+            neighbour = nearest_neighbour(current_position, clients, available_space)
         if not neighbour or manhattan_distance(current_position, neighbour["position"]) > manhattan_distance((0, 0), neighbour["position"]):
             return current_tour
         else:
