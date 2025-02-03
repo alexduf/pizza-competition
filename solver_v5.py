@@ -13,8 +13,8 @@ def next_delivery_candidates(
     clients.sort(key=lambda client: manhattan_distance(position, client["position"]))
     # filter such that we keep only if we have the capacity
     clients = list(filter(lambda client: client["pizzas"] <= available_space, clients))
-    # first 10 results
-    return clients[:2]
+    # first result
+    return clients[:1]
 
 def first_delivery_candidates(
         position: tuple[int, int],
@@ -27,7 +27,7 @@ def first_delivery_candidates(
     # filter such that we keep only if we have the capacity
     # clients = list(filter(lambda client: client["pizzas"] <= available_space, clients))
     # first 10 results
-    return clients[:5]
+    return clients[:10]
 
 def plan_tour(
         clients: list[dict[str, any]]
