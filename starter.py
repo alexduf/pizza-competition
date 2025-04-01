@@ -8,6 +8,7 @@ from solver_v5 import solve_v5
 from solver_v6 import solve_v6
 from solver_v7 import solve_v7
 from solver_v8 import solve_v8
+from solver_v9 import solve_v9
 
 
 def plot_solution(tours_string: str):
@@ -57,4 +58,5 @@ if __name__ == "__main__":
     # evaluate_solver(solve_v5, clients, draw=False)
     # evaluate_solver(solve_v6, clients, draw=False)
     # evaluate_solver(solve_v7, clients, draw=False)
-    evaluate_solver(solve_v8, clients, draw=False)
+    # evaluate_solver(solve_v8, clients, draw=False)
+    evaluate_solver(solve_v9, clients, draw=False)
