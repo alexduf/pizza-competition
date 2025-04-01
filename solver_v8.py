@@ -501,7 +501,7 @@ class GeneticAlgorithm:
                 stagnation_counter += 1
                 
             # Log progress
-            if generation % 50 == 0:
+            if generation % 100 == 0:
                 print(f"Generation {generation}: Best fitness: {self.best_fitness}, All-time best: {self.all_time_best_fitness}")
         
         # Final evaluation
@@ -542,4 +542,4 @@ def solve_v8(clients: list[dict[str, any]]) -> str:
         crossover_rate=0.8,
         mutation_rate=0.3
     )
-    return ga.evolve(max_generations=1000, stagnation_limit=200)
+    return ga.evolve(max_generations=10000, stagnation_limit=300)
